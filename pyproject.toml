@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pre-ingest-testing"
+dynamic = ["version"]
+description = "Pytest-based framework for running named pre-ingest tests against a specified file"
+readme = "README.md"
+requires-python = ">=3.12,<4"
+dependencies = [
+    "pytest>=8.3.5",
+    "xarray",
+    "numpy",
+    "l2ss-py",
+]
+
+[project.optional-dependencies]
+dev = [
+    "coverage>=7.8.0",
+    "mypy>=1.15.0",
+    "pytest-cov>=6.1.1",
+    "ruff>=0.11.8",
+]
+
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "0.1.0"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pre_ingest_testing"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+]
+markers = [
+    "pre_ingest: named pre-ingest file validation tests",
+    "test_name(*names): Logical test grouping",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "UP", "B", "C4", "SIM", "RUF"]
