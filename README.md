@@ -11,14 +11,14 @@ uv sync
 ## Run with pytest
 
 ```bash
-uv run pytest --test-name l2ss_spatial --filename /path/to/file
+uv run pytest tests --test-name l2ss_spatial --filename /path/to/file
 ```
 
 Examples:
 
 ```bash
-uv run pytest --test-name l2ss --filename data/path/to/file
-uv run pytest --test-name l2ss_temporal --filename data/path/to/file
+uv run pytest tests --test-name l2ss --filename data/path/to/file
+uv run pytest tests --test-name l2ss_temporal --filename data/path/to/file
 ```
 ## Adding a named test
 
@@ -45,15 +45,15 @@ The names passed to `@pytest.mark.test_name()` are used with the
 `--test-name` command-line option. For example:
 
 ```bash
-uv run pytest --test-name l2ss --filename example.nc
+uv run pytest tests --test-name l2ss --filename example.nc
 ```
 
 or
 
 ```bash
-uv run pytest --test-name l2ss_spatial --filename example.nc
+uv run pytest tests --test-name l2ss_spatial --filename example.nc
 ```
-
+pytest tests
 The Python function name (`test_l2ss_spatial` in this example) is used only for
 pytest test discovery and does not need to match the value passed to
 `--test-name`.

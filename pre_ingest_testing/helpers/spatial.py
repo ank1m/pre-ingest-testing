@@ -67,10 +67,6 @@ def _find_coordinate(tree: DataTree, coordinate_type: str) -> xr.DataArray:
     raise ValueError(f"Could not find {coordinate_type} coordinate")
 
 
-
-from math import sqrt
-
-
 def generate_partial_spatial_box(
     path: str | Path,
     output_size: float = 0.05,
@@ -109,5 +105,3 @@ def generate_partial_spatial_box(
         east - width_trim,
         north - height_trim,
     )
-
-

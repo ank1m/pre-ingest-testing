@@ -7,7 +7,7 @@ name = "pre-ingest-testing"
 dynamic = ["version"]
 description = "Pytest-based framework for running named pre-ingest tests against a specified file"
 readme = "README.md"
-requires-python = ">=3.12,<4"
+requires-python = ">=3.11,<3.13"
 dependencies = [
     "pytest>=8.3.5",
     "xarray",

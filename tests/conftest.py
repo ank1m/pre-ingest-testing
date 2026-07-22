@@ -46,9 +46,7 @@ def pytest_collection_modifyitems(
     items[:] = selected_items
 
     if not selected_items:
-        raise pytest.UsageError(
-            f"No tests found for --test-name={selected_name!r}"
-        )
+        raise pytest.UsageError(f"No tests found for --test-name={selected_name!r}")
 
 
 def pytest_terminal_summary(terminalreporter):
@@ -57,7 +55,7 @@ def pytest_terminal_summary(terminalreporter):
         "Pre-ingest testing completed successfully",
     )
 
-    
+
 @pytest.fixture(scope="session")
 def input_file(pytestconfig: pytest.Config) -> Path:
     filename = pytestconfig.getoption("filename")

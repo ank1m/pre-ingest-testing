@@ -3,7 +3,6 @@ from pathlib import Path
 
 import numpy as np
 import xarray as xr
-
 from podaac.subsetter.utils import coordinate_utils
 
 
@@ -16,10 +15,8 @@ def get_temporal_range(path: str | Path) -> tuple[datetime, datetime]:
     """
 
     with xr.open_datatree(path, decode_times=True) as tree:
-        _, _, time_vars = coordinate_utils.get_coordinate_variable_names(
-            tree
-        )
-        print('===================================')
+        _, _, time_vars = coordinate_utils.get_coordinate_variable_names(tree)
+        print("===================================")
         print(time_vars)
 
         starts = []
@@ -35,7 +32,7 @@ def get_temporal_range(path: str | Path) -> tuple[datetime, datetime]:
 
     start = min(starts)
     end = max(ends)
-    print(start,end.dtype)
+    print(start, end.dtype)
 
     return (
         _to_datetime(start),
@@ -67,7 +64,7 @@ def generate_near_full_temporal_range(
     tuple
         (start, end) of the trimmed range.
     """
-    start,end = get_temporal_range(path)
+    start, end = get_temporal_range(path)
 
     if not (0.0 <= fraction < 0.5):
         raise ValueError("fraction must be in the range [0, 0.5)")
@@ -79,4 +76,3 @@ def generate_near_full_temporal_range(
         start + trim,
         end - trim,
     )
-
