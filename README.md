@@ -5,60 +5,55 @@ A small pytest-based framework for running a named test against a specified file
 ## Install
 
 ```bash
-pip install -e .
-```
-
-or:
-
-```bash
 uv sync
 ```
 
 ## Run with pytest
 
 ```bash
-pytest --test-name file_exists --filename /path/to/file
+uv run pytest --test-name l2ss_spatial --filename /path/to/file
 ```
 
 Examples:
 
 ```bash
-pytest --test-name file_not_empty --filename data/example.txt
-pytest --test-name valid_json --filename data/example.json
+uv run pytest --test-name l2ss --filename data/path/to/file
+uv run pytest --test-name l2ss_temporal --filename data/path/to/file
 ```
+## Adding a named test
 
-## Run through the CLI
+Create a new test file under the `tests/` directory. Test files must be named
+`test_*.py`, and test functions must be named `test_*` so that pytest can
+discover them automatically.
 
-```bash
-pre-ingest-test file_exists /path/to/file
-pre-ingest-test valid_json data/example.json
-```
-
-Pass additional pytest arguments after `--`:
-
-```bash
-pre-ingest-test valid_json data/example.json -- -v -s
-```
-
-## List available tests
-
-```bash
-pre-ingest-test --list-tests
-```
-
-## Add a new named test
-
-Add a function to `src/pre_ingest_testing/checks.py` and register it with
-the `@register_test("name")` decorator.
+Register the test with the `@pytest.mark.test_name()` decorator. One or more
+names may be provided.
 
 ```python
-@register_test("has_expected_suffix")
-def has_expected_suffix(path: Path) -> None:
-    assert path.suffix == ".nc", f"Expected a NetCDF file, got {path.suffix}"
+import pytest
+from pathlib import Path
+
+@pytest.mark.test_name("l2ss", "l2ss_spatial")
+def test_l2ss_spatial(
+    input_file: Path,
+    tmp_path: Path,
+) -> None:
+    ...
 ```
 
-Then run:
+The names passed to `@pytest.mark.test_name()` are used with the
+`--test-name` command-line option. For example:
 
 ```bash
-pytest --test-name has_expected_suffix --filename example.nc
+uv run pytest --test-name l2ss --filename example.nc
 ```
+
+or
+
+```bash
+uv run pytest --test-name l2ss_spatial --filename example.nc
+```
+
+The Python function name (`test_l2ss_spatial` in this example) is used only for
+pytest test discovery and does not need to match the value passed to
+`--test-name`.
