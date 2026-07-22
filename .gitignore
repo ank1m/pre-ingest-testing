@@ -205,3 +205,5 @@ ENV/
 
 # mkdocs documentation
 /site
+
+uv.lock
