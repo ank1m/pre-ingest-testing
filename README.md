@@ -53,7 +53,6 @@ or
 ```bash
 uv run pytest tests --test-name l2ss_spatial --filename example.nc
 ```
-pytest tests
 The Python function name (`test_l2ss_spatial` in this example) is used only for
 pytest test discovery and does not need to match the value passed to
 `--test-name`.
