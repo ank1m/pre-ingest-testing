@@ -24,7 +24,7 @@ def test_casper_reformat(
         f"CASPER did not create the expected output file while reformatting: {output_file}"
     )
 
-@pytest.mark.test_name("casper", "valid_file")
+@pytest.mark.test_name("casper", "casper_valid_file_type")
 def test_casper_valid_file_type(
     input_file: Path,
 ) -> None:
@@ -37,7 +37,7 @@ def test_casper_valid_file_type(
         f"Input file is not valid type for CASPER processing: {input_file}"
     )
 
-@pytest.mark.test_name("casper", "valid_file")
+@pytest.mark.test_name("casper", "casper_valid_file")
 def test_casper_file_workable (
     input_file: Path,
 ) -> None:
