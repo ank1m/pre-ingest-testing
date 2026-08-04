@@ -23,13 +23,13 @@ dev = [
 [tool.uv]
 conflicts = [
     [
-        { group = "podacc" },
+        { group = "podaac" },
         { group = "asdc" },
     ],
 ]
 
 [dependency-groups]
-podacc = [
+podaac = [
     "l2ss-py>=3.1.0",
     "xarray==2025.1.0",
     "numpy",
