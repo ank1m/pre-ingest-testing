@@ -12,9 +12,10 @@ from pre_ingest_testing.services.casper import (
 @pytest.mark.test_name("casper")
 def test_casper_reformat(
     input_file: Path,
+    tmp_path: Path,
 ) -> None:
   
-    output_file = Path(f"{input_file.parent}/{input_file.name}.zip")
+    output_file = tmp_path / f"{input_file.name}.zip"
     run_casper(
         input_file=input_file,
         output_file=output_file
@@ -22,6 +23,9 @@ def test_casper_reformat(
 
     assert output_file.exists(), (
         f"CASPER did not create the expected output file while reformatting: {output_file}"
+    )
+    assert output_file.stat().st_size > 0, (
+        f"CASPER created an empty output file while reformatting: {output_file}"
     )
 
 @pytest.mark.test_name("casper", "casper_valid_file_type")
